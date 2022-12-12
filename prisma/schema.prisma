@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int @id @default(autoincrement())
+  name                String
+  phone               String
+  email               String
+  password            String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user_type           UserType
+}
+
+enum UserType {
+  BUYER
+  REALTOR
+  ADMIN
+}
+
+model Home {
+  id                  Int @id @default(autoincrement())
+  address             String
+  number_of_bedrooms  Int
+  number_of_bathrooms Float
+  city                String
+  listed_date         DateTime @default(now())
+  price               Float
+  land_size           Float
+  propertyType        PropertyType    
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt  
+}
+
+model Image {
+  id                  Int @id @default(autoincrement())
+  url                 String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  home_id             Int
+}
+
+model Message {
+  id                  Int @id @default(autoincrement())
+  message             String
+}
+
+enum PropertyType {
+  RESIDENTIAL
+  CONDO
+}
+
