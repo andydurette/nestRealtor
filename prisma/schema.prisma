@@ -59,3 +59,14 @@ enum PropertyType {
   CONDO
 }
 
+// Homes 
+// id = 1 address = 101 QUEEN STREET UNITY#PH17
+// id = 2 address = 102 QUEEN STREET UNITY#PH17
+// id = 3 address = 103 QUEEN STREET UNITY#PH17
+// id = 4 address = 104 QUEEN STREET UNITY#PH17
+
+// Images 
+// id = 1 url = url1 home_id = 1
+// id = 2 url = url2 home_id = 2
+// id = 3 url = url3 home_id = 3
+// id = 4 url = url4 home_id = 4
