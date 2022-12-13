@@ -19,6 +19,9 @@ model User {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   user_type           UserType
+  homes               Home[]
+  buyer_messages      Message[] @relation("buyer_messages")
+  realtor_messages    Message[] @relation("realtor_messages")
 }
 
 enum UserType {
@@ -38,7 +41,11 @@ model Home {
   land_size           Float
   propertyType        PropertyType    
   createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt  
+  updatedAt           DateTime @updatedAt
+  images              Image[]
+  realtor_id          Int
+  realtor             User @relation(fields: [realtor_id], references: [id])
+  messages            Message[]
 }
 
 model Image {
@@ -47,11 +54,18 @@ model Image {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   home_id             Int
+  home                Home @relation(fields:[home_id], references: [id])
 }
 
 model Message {
   id                  Int @id @default(autoincrement())
   message             String
+  home_id             Int
+  home                Home @relation(fields:[home_id], references: [id])
+  realtor_id          Int
+  realtor             User @relation("buyer_messages", fields:[realtor_id], references: [id])
+  buyer_id            Int
+  buyer               User @relation("realtor_messages", fields:[buyer_id], references: [id])
 }
 
 enum PropertyType {
@@ -67,6 +81,6 @@ enum PropertyType {
 
 // Images 
 // id = 1 url = url1 home_id = 1
-// id = 2 url = url2 home_id = 2
-// id = 3 url = url3 home_id = 3
-// id = 4 url = url4 home_id = 4
+// id = 2 url = url2 home_id = 1
+// id = 3 url = url3 home_id = 2
+// id = 4 url = url4 home_id = 3
